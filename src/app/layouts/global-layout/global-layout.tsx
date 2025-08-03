@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { AppProvider } from "../../providers/app-provider";
 import "../../styles";
 
 export const viewport = {
@@ -16,9 +15,7 @@ export const metadata: Metadata = {
 export function GlobalLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ru" suppressHydrationWarning>
-      <body>
-        <AppProvider>{children}</AppProvider>
-      </body>
+      <body>{children}</body>
     </html>
   );
 }

@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import { AppProvider } from "../../providers/app-provider";
 import { defaultMetadata } from "@/shared/config/defaultMetadata";
+import { Sidebar } from "@/widgets/sidebar";
 
 export const metadata: Metadata = {
   ...defaultMetadata,
@@ -10,10 +11,11 @@ export const metadata: Metadata = {
 
 export function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ru" suppressHydrationWarning>
-      <body>
-        <AppProvider>{children}</AppProvider>
-      </body>
-    </html>
+    <AppProvider>
+      <main className={"flex"}>
+        <Sidebar />
+        {children}
+      </main>
+    </AppProvider>
   );
 }
