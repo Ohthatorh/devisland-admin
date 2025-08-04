@@ -1,5 +1,1 @@
-export type SidebarData = {
-  id: number;
-  label: string;
-  path: string;
-};
+export type { SidebarData } from "./types";
