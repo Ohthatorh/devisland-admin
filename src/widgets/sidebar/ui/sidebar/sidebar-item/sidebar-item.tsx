@@ -1,10 +1,11 @@
-import { ISidebarData } from "@/widgets/sidebar/model";
+"use client";
+
+import { ISidebarData } from "@/entities/sidebar";
+import { Typography } from "@mui/material";
+import Link from "next/link";
+import styles from "./sidebar-item.module.scss";
 
 export function SidebarItem({ item }: ISidebarData) {
   console.log(item);
-  return (
-    <li>
-      <a href={item.path}>{item.label}</a>
-    </li>
-  );
+  return <Link href={item.path}>{item.label}</Link>;
 }

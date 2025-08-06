@@ -17,4 +17,12 @@ export const appTheme = createTheme({
       fontFamily: roboto.style.fontFamily,
     },
   },
+  palette: {
+    background: {
+      default: "var(--background-color)",
+    },
+    text: {
+      primary: "var(--foreground-color)",
+    },
+  },
 });
