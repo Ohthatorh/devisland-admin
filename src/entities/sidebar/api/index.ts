@@ -1,1 +1,0 @@
-export { getSidebarData } from "./api";
