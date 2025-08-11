@@ -1,24 +1,14 @@
 "use client";
 
-import Drawer from "@mui/material/Drawer";
-import List from "@mui/material/List";
+import MuiDrawer from "@mui/material/Drawer";
+import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
-import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import { FC, useState } from "react";
-import clsx from "clsx";
-import Link from "next/link";
-import { Logo } from "@/assets/icons";
-import { TSidebarItem } from "./app-sidebar.types";
-import AppSidebarLink from "./app-sidebar-link";
-import styles from "./app-sidebar.module.scss";
 import AppSidebarUser from "./app-sidebar-user";
-
-export const DEFAULT_SIDEBAR_ITEMS: TSidebarItem[] = [
-  { id: 1, label: "Дашборд", path: "/", icon: "dashboard" },
-  { id: 2, label: "Заказы", path: "/orders/", icon: "receipt" },
-];
+import AppSidebarMenuContent from "./app-sidebar-menu-content";
+import AppSidebarHeader from "./app-sidebar-header";
+import { FC, useState } from "react";
+import styles from "./app-sidebar.module.scss";
+import clsx from "clsx";
 
 const AppSidebar: FC = () => {
   const [open, setOpen] = useState(true);
@@ -26,9 +16,8 @@ const AppSidebar: FC = () => {
   const handleClick = () => {
     setOpen(!open);
   };
-
   return (
-    <Drawer
+    <MuiDrawer
       variant="permanent"
       className={clsx(styles.drawer, {
         [styles.drawer__open]: open,
@@ -38,24 +27,14 @@ const AppSidebar: FC = () => {
         paper: styles.drawer__container,
       }}
     >
-      <div className={styles.drawer__header}>
-        {open && (
-          <Link className={styles.drawer__logo} href="/">
-            <Logo />
-          </Link>
-        )}
-        <IconButton onClick={handleClick}>
-          {open ? <ChevronLeftIcon /> : <MenuIcon />}
-        </IconButton>
-      </div>
+      <AppSidebarHeader handleClick={handleClick} open={open} />
       <Divider />
-      <List>
-        {DEFAULT_SIDEBAR_ITEMS.map((item) => (
-          <AppSidebarLink key={item.id} item={item} open={open} />
-        ))}
-      </List>
+      <Box className={styles.contentBox}>
+        <AppSidebarMenuContent open={open} />
+      </Box>
+      <Divider />
       <AppSidebarUser open={open} />
-    </Drawer>
+    </MuiDrawer>
   );
 };
 

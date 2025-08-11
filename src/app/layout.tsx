@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "@/styles/global.scss";
 import Head from "next/head";
+import { InitColorSchemeScript } from "@mui/material";
 
 export const viewport = {
   width: "device-width",
@@ -26,7 +27,10 @@ export default function RootLayout({
           rel="stylesheet"
         ></link>
       </head>
-      <body>{children}</body>
+      <body>
+        <InitColorSchemeScript attribute="class" />
+        {children}
+      </body>
     </html>
   );
 }

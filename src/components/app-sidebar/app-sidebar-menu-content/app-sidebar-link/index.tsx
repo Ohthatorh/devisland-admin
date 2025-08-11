@@ -1,14 +1,14 @@
 import {
   ListItem,
   ListItemButton,
+  ListItemIcon,
   ListItemText,
-  Typography,
+  Tooltip,
 } from "@mui/material";
-import styles from "./app-sidebar-link.module.scss";
 import { FC } from "react";
-import { TSidebarItem } from "../app-sidebar.types";
 import Icon from "@mui/material/Icon";
 import Link from "next/link";
+import { TSidebarItem } from "../../app-sidebar.types";
 
 interface IAppSidebarLink {
   open: boolean;
@@ -17,14 +17,18 @@ interface IAppSidebarLink {
 
 const AppSidebarLink: FC<IAppSidebarLink> = ({ open, item }) => {
   return (
-    <ListItem className={styles.listItem} disablePadding>
+    <ListItem disablePadding>
       <ListItemButton
         LinkComponent={Link}
         href={item.path}
-        className={styles.link}
+        sx={{ display: "flex", alignItems: "center", gap: "20px" }}
       >
-        <Icon>{item.icon}</Icon>
-        {open && <Typography>{item.label}</Typography>}
+        <Tooltip title={item.label}>
+          <ListItemIcon sx={{ minWidth: 0 }}>
+            <Icon>{item.icon}</Icon>
+          </ListItemIcon>
+        </Tooltip>
+        {open && <ListItemText primary={item.label} sx={{ m: 0 }} />}
       </ListItemButton>
     </ListItem>
   );
