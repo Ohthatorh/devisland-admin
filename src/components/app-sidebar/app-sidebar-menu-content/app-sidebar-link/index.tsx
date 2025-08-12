@@ -11,11 +11,11 @@ import Link from "next/link";
 import { TSidebarItem } from "../../app-sidebar.types";
 
 interface IAppSidebarLink {
-  open: boolean;
+  isVisibleMenu: boolean;
   item: TSidebarItem;
 }
 
-const AppSidebarLink: FC<IAppSidebarLink> = ({ open, item }) => {
+const AppSidebarLink: FC<IAppSidebarLink> = ({ isVisibleMenu, item }) => {
   return (
     <ListItem disablePadding>
       <ListItemButton
@@ -28,7 +28,7 @@ const AppSidebarLink: FC<IAppSidebarLink> = ({ open, item }) => {
             <Icon>{item.icon}</Icon>
           </ListItemIcon>
         </Tooltip>
-        {open && <ListItemText primary={item.label} sx={{ m: 0 }} />}
+        {isVisibleMenu && <ListItemText primary={item.label} sx={{ m: 0 }} />}
       </ListItemButton>
     </ListItem>
   );

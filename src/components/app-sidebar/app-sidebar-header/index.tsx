@@ -1,4 +1,4 @@
-import { Box, IconButton } from "@mui/material";
+import { Box, IconButton, Tooltip } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import { FC } from "react";
@@ -6,11 +6,14 @@ import Link from "next/link";
 import { Logo } from "@/assets/icons";
 
 interface IAppSidebarHeader {
-  open: boolean;
+  isVisibleMenu: boolean;
   handleClick: () => void;
 }
 
-const AppSidebarHeader: FC<IAppSidebarHeader> = ({ open, handleClick }) => {
+const AppSidebarHeader: FC<IAppSidebarHeader> = ({
+  isVisibleMenu,
+  handleClick,
+}) => {
   return (
     <Box
       sx={{
@@ -20,14 +23,16 @@ const AppSidebarHeader: FC<IAppSidebarHeader> = ({ open, handleClick }) => {
         justifyContent: "space-between",
       }}
     >
-      {open && (
+      {isVisibleMenu && (
         <Link href="/">
           <Logo />
         </Link>
       )}
-      <IconButton onClick={handleClick}>
-        {open ? <ChevronLeftIcon /> : <MenuIcon />}
-      </IconButton>
+      <Tooltip title={isVisibleMenu ? "Скрыть меню" : "Показать меню"}>
+        <IconButton onClick={handleClick}>
+          {isVisibleMenu ? <ChevronLeftIcon /> : <MenuIcon />}
+        </IconButton>
+      </Tooltip>
     </Box>
   );
 };

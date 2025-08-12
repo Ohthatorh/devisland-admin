@@ -1,18 +1,24 @@
 import {
-  Box,
   ListItem,
   ListItemButton,
   ListItemIcon,
   ListItemText,
   Menu,
   MenuItem,
+  Tooltip,
   useColorScheme,
 } from "@mui/material";
 import DarkModeIcon from "@mui/icons-material/DarkModeRounded";
 import LightModeIcon from "@mui/icons-material/LightModeRounded";
 import { FC, useState } from "react";
 
-const AppSidebarThemeSwitcher: FC = () => {
+interface IAppSidebarThemeSwitcher {
+  isVisibleMenu: boolean;
+}
+
+const AppSidebarThemeSwitcher: FC<IAppSidebarThemeSwitcher> = ({
+  isVisibleMenu,
+}) => {
   const { mode, systemMode, setMode } = useColorScheme();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -41,8 +47,10 @@ const AppSidebarThemeSwitcher: FC = () => {
         onClick={handleClick}
         sx={{ display: "flex", alignItems: "center", gap: "20px" }}
       >
-        <ListItemIcon sx={{ minWidth: 0 }}>{icon}</ListItemIcon>
-        <ListItemText primary={"Тема"} sx={{ m: 0 }} />
+        <Tooltip title={"Тема"}>
+          <ListItemIcon sx={{ minWidth: 0 }}>{icon}</ListItemIcon>
+        </Tooltip>
+        {isVisibleMenu && <ListItemText primary={"Тема"} sx={{ m: 0 }} />}
       </ListItemButton>
       <Menu
         anchorEl={anchorEl}

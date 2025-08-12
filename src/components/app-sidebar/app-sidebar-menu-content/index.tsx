@@ -16,22 +16,32 @@ const secondaryListItems = [
 ];
 
 interface IAppSidebarMenuContent {
-  open: boolean;
+  isVisibleMenu: boolean;
 }
 
-const AppSidebarMenuContent: FC<IAppSidebarMenuContent> = ({ open }) => {
+const AppSidebarMenuContent: FC<IAppSidebarMenuContent> = ({
+  isVisibleMenu,
+}) => {
   return (
     <Stack sx={{ flexGrow: 1, p: 1, justifyContent: "space-between" }}>
       <List>
         {mainListItems.map((item, index) => (
-          <AppSidebarLink key={index} open={open} item={item} />
+          <AppSidebarLink
+            key={index}
+            isVisibleMenu={isVisibleMenu}
+            item={item}
+          />
         ))}
       </List>
       <List>
+        <AppSidebarThemeSwitcher isVisibleMenu={isVisibleMenu} />
         {secondaryListItems.map((item, index) => (
-          <AppSidebarLink key={index} open={open} item={item} />
+          <AppSidebarLink
+            key={index}
+            isVisibleMenu={isVisibleMenu}
+            item={item}
+          />
         ))}
-        <AppSidebarThemeSwitcher />
       </List>
     </Stack>
   );

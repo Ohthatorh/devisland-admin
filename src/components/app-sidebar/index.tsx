@@ -11,29 +11,32 @@ import styles from "./app-sidebar.module.scss";
 import clsx from "clsx";
 
 const AppSidebar: FC = () => {
-  const [open, setOpen] = useState(true);
+  const [isVisibleMenu, setIsVisibleMenu] = useState(true);
 
   const handleClick = () => {
-    setOpen(!open);
+    setIsVisibleMenu(!isVisibleMenu);
   };
   return (
     <MuiDrawer
       variant="permanent"
       className={clsx(styles.drawer, {
-        [styles.drawer__open]: open,
-        [styles.drawer__close]: !open,
+        [styles.drawer__open]: isVisibleMenu,
+        [styles.drawer__close]: !isVisibleMenu,
       })}
       classes={{
         paper: styles.drawer__container,
       }}
     >
-      <AppSidebarHeader handleClick={handleClick} open={open} />
+      <AppSidebarHeader
+        handleClick={handleClick}
+        isVisibleMenu={isVisibleMenu}
+      />
       <Divider />
       <Box className={styles.contentBox}>
-        <AppSidebarMenuContent open={open} />
+        <AppSidebarMenuContent isVisibleMenu={isVisibleMenu} />
       </Box>
       <Divider />
-      <AppSidebarUser open={open} />
+      <AppSidebarUser isVisibleMenu={isVisibleMenu} />
     </MuiDrawer>
   );
 };
