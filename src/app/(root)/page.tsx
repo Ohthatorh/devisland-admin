@@ -1,5 +1,5 @@
-import Image from "next/image";
+import Home from "@/routes/home";
 
-export default function Home() {
-  return <>asd</>;
+export default function Page() {
+  return <Home />;
 }

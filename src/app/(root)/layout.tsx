@@ -2,7 +2,8 @@ import AppProvider from "@/components/app-provider";
 import AppSidebar from "@/components/app-sidebar";
 import { defaultMetadata } from "@/shared/constants/default-metadata";
 import { Metadata } from "next";
-import styles from "@/styles/root-layout.module.scss";
+import AppHeader from "@/components/app-header";
+import { Box } from "@mui/material";
 
 export const metadata: Metadata = {
   ...defaultMetadata,
@@ -13,10 +14,13 @@ export const metadata: Metadata = {
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <AppProvider>
-      <main className={styles.main}>
+      <Box component={"main"} sx={{ display: "flex" }}>
         <AppSidebar />
-        {children}
-      </main>
+        <Box sx={{ margin: "0 16px", flexGrow: 1 }}>
+          <AppHeader />
+          {children}
+        </Box>
+      </Box>
     </AppProvider>
   );
 }
